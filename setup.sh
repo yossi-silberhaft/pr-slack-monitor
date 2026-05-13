@@ -6,8 +6,8 @@ cd "$SCRIPT_DIR"
 
 CRON_TAG_REALTIME="# pr-slack-monitor:realtime"
 CRON_TAG_SUMMARY="# pr-slack-monitor:summary"
-DEFAULT_CRON_REALTIME="*/5 * * * *"
-DEFAULT_CRON_SUMMARY="0 9 * * 1-5"
+DEFAULT_CRON_REALTIME="* * * * *"
+DEFAULT_CRON_SUMMARY="0 9,16 * * *"
 
 echo
 echo "📦 pr-slack-monitor setup"
@@ -92,7 +92,7 @@ else
   if ! grep -qF "$CRON_TAG_REALTIME" <<<"$CURRENT_CRON"; then
     NEW_CRON="$NEW_CRON
 $DEFAULT_CRON_REALTIME $SCRIPT_DIR/run_realtime.sh >> $SCRIPT_DIR/realtime.log 2>&1 $CRON_TAG_REALTIME"
-    echo "   + adding realtime (every 5 min)"
+    echo "   + adding realtime (every minute)"
   else
     echo "   = realtime already installed, leaving it alone"
   fi
@@ -100,7 +100,7 @@ $DEFAULT_CRON_REALTIME $SCRIPT_DIR/run_realtime.sh >> $SCRIPT_DIR/realtime.log 2
   if ! grep -qF "$CRON_TAG_SUMMARY" <<<"$CURRENT_CRON"; then
     NEW_CRON="$NEW_CRON
 $DEFAULT_CRON_SUMMARY $SCRIPT_DIR/run_summary.sh >> $SCRIPT_DIR/summary.log 2>&1 $CRON_TAG_SUMMARY"
-    echo "   + adding summary (weekdays 9am)"
+    echo "   + adding summary (9am and 4pm daily)"
   else
     echo "   = summary already installed, leaving it alone"
   fi

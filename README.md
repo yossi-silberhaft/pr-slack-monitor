@@ -71,8 +71,8 @@ your private channel. **If you need help creating the webhook, reach out.**
 
 | Job      | Schedule         | What it does                                              |
 | -------- | ---------------- | --------------------------------------------------------- |
-| realtime | every 5 min      | Checks for new approvals / change requests / review requests / comments and sends them as one batched Slack message. |
-| summary  | weekdays at 9am  | Posts a digest of all your open PRs, grouped by repo.     |
+| realtime | every minute     | Checks for new approvals / change requests / review requests / comments and sends them as one batched Slack message. |
+| summary  | 9am and 4pm daily | Posts a digest of all your open PRs, grouped by repo.    |
 
 Edit `crontab -e` to change the schedules. The entries are tagged with
 `# pr-slack-monitor:realtime` and `# pr-slack-monitor:summary` so they're easy
