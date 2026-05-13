@@ -1,0 +1,6 @@
+.env
+.pr-monitor-state.json
+node_modules/
+.idea/
+*.log
+.DS_Store
